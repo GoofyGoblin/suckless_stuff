@@ -1,10 +1,23 @@
 --- dwm.c
 +++ dwm.c
-@@ -251,6 +261,7 @@ static char stext[256];
- static int screen;
- static int sw, sh;           /* X display screen geometry width, height */
- static int bh, blw = 0;      /* bar geometry */
-+static int th = 0;           /* tab bar geometry */
- static int lrpad;            /* sum of left and right padding for text */
- static int (*xerrorxlib)(Display *, XErrorEvent *);
- static unsigned int numlockmask = 0;
+@@ -230,6 +255,7 @@ static void setup(void);
+ static void seturgent(Client *c, int urg);
+ static void showhide(Client *c);
+ static void spawn(const Arg *arg);
++static Monitor *systraytomon(Monitor *m);
+ static void tag(const Arg *arg);
+ static void tagmon(const Arg *arg);
+ static void tile(Monitor *m);
+@@ -877,8 +974,11 @@ expose(XEvent *e)
+ 	Monitor *m;
+ 	XExposeEvent *ev = &e->xexpose;
+ 
+-	if (ev->count == 0 && (m = wintomon(ev->window)))
++	if (ev->count == 0 && (m = wintomon(ev->window))) {
+ 		drawbar(m);
++		if (m == selmon)
++			updatesystray();
++	}
+ }
+ 
+ void
