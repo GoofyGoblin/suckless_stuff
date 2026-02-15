@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -24,11 +25,11 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_gray5[]        = "#373737";
-static const char col_gray6[]        = "#474747";
+static const char col_gray6[]        = "#808080";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_gray5,  col_gray6  },
+	[SchemeSel]  = { col_gray4, col_gray5,  col_gray6 },
 };
 
 /* tagging */
@@ -72,12 +73,19 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_gray5, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *roficmd[] = { "rofi", "-show", "drun" };
+static const char *termcmd[]  = { "alacritty", NULL };
 static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
+static const char *volumeUp[] = {"./volumecontrol.sh", "up", NULL };
+static const char *volumeDown[] = {"./volumecontrol.sh", "down", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ 0,   XF86XK_AudioRaiseVolume, spawn, {.v = volumeUp} },
+	{ 0,   XF86XK_AudioLowerVolume, spawn, {.v = volumeDown} },
+	// { 0,   XF86XK_AudioRaiseVolume, spawn, SHCMD("./volumecontrol.sh up") },
+	// { 0,   XF86XK_AudioLowerVolume, spawn, SHCMD("./volumecontrol.sh down") },
+	{ MODKEY,                       XK_d,      spawn,          {.v = roficmd } },
 	{ MODKEY,             		XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_w,      tabmode,        {-1} },
