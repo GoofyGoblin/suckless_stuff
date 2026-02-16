@@ -18,8 +18,8 @@ enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always
 static const int showtab			= showtab_auto;        /* Default tab bar show mode */
 static const int toptab				= False;               /* False means bottom tab bar */
 
-static const char *fonts[]          = { "IosevkaNerdFontMono:size=10" };
-static const char dmenufont[]       = "IosevkaNerdFontMono:size=10";
+static const char *fonts[]          = { "IosevkaNerdFontMono:size=16" };
+static const char dmenufont[]       = "IosevkaNerdFontMono:size=16";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -70,19 +70,21 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+static const int dmenudesktop = 1; /* 1 means dmenu will use only desktop files from [/usr/share/applications/] */
+
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_gray5, "-sf", col_gray4, NULL };
 static const char *roficmd[] = { "rofi", "-show", "drun" };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "st", NULL };
 static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *volumeUp[] = {"./volumecontrol.sh", "up", NULL };
 static const char *volumeDown[] = {"./volumecontrol.sh", "down", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ 0,   XF86XK_AudioRaiseVolume, spawn, {.v = volumeUp} },
-	{ 0,   XF86XK_AudioLowerVolume, spawn, {.v = volumeDown} },
+	// { 0,   XF86XK_AudioRaiseVolume, spawn, {.v = volumeUp} },
+	// { 0,   XF86XK_AudioLowerVolume, spawn, {.v = volumeDown} },
 	// { 0,   XF86XK_AudioRaiseVolume, spawn, SHCMD("./volumecontrol.sh up") },
 	// { 0,   XF86XK_AudioLowerVolume, spawn, SHCMD("./volumecontrol.sh down") },
 	{ MODKEY,                       XK_d,      spawn,          {.v = roficmd } },
