@@ -16,7 +16,7 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 /*  Modes after showtab_nmodes are disabled.                                */
 enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always};
 static const int showtab			= showtab_auto;        /* Default tab bar show mode */
-static const int toptab				= False;               /* False means bottom tab bar */
+static const int toptab				= True;               /* False means bottom tab bar */
 
 static const char *fonts[]          = { "IosevkaNerdFontMono:size=16" };
 static const char dmenufont[]       = "IosevkaNerdFontMono:size=16";
@@ -78,18 +78,22 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *roficmd[] = { "rofi", "-show", "drun" };
 static const char *termcmd[]  = { "st", NULL };
 static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
-static const char *volumeUp[] = {"./volumecontrol.sh", "up", NULL };
-static const char *volumeDown[] = {"./volumecontrol.sh", "down", NULL };
+static const char *volumeUp[] = {"./volume_control.sh", "increase", NULL };
+static const char *volumeDown[] = {"./volume_control.sh", "decrease", NULL };
+static const char *volumeMute[] = {"./volume_control.sh", "mute", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	// { 0,   XF86XK_AudioRaiseVolume, spawn, {.v = volumeUp} },
-	// { 0,   XF86XK_AudioLowerVolume, spawn, {.v = volumeDown} },
+	{ 0,   XF86XK_AudioRaiseVolume, spawn, {.v = volumeUp} },
+	{ 0,   XF86XK_AudioLowerVolume, spawn, {.v = volumeDown} },
+	{ 0,   XF86XK_AudioMute,        spawn, {.v = volumeMute} },
 	// { 0,   XF86XK_AudioRaiseVolume, spawn, SHCMD("./volumecontrol.sh up") },
 	// { 0,   XF86XK_AudioLowerVolume, spawn, SHCMD("./volumecontrol.sh down") },
 	{ MODKEY,                       XK_d,      spawn,          {.v = roficmd } },
 	{ MODKEY,             		XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY,                       XK_a,      spawn,          SHCMD("warpd --hint") },
+	{ MODKEY,                       XK_c,      spawn,          SHCMD("warpd --normal") },
 	{ MODKEY,                       XK_w,      tabmode,        {-1} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
