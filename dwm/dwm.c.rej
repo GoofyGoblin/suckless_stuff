@@ -1,23 +1,23 @@
 --- dwm.c
 +++ dwm.c
-@@ -230,6 +255,7 @@ static void setup(void);
+@@ -205,7 +180,6 @@ static void setup(void);
  static void seturgent(Client *c, int urg);
  static void showhide(Client *c);
  static void spawn(const Arg *arg);
-+static Monitor *systraytomon(Monitor *m);
+-static Monitor *systraytomon(Monitor *m);
  static void tag(const Arg *arg);
  static void tagmon(const Arg *arg);
  static void tile(Monitor *m);
-@@ -877,8 +974,11 @@ expose(XEvent *e)
+@@ -782,11 +685,8 @@ expose(XEvent *e)
  	Monitor *m;
  	XExposeEvent *ev = &e->xexpose;
  
--	if (ev->count == 0 && (m = wintomon(ev->window)))
-+	if (ev->count == 0 && (m = wintomon(ev->window))) {
+-	if (ev->count == 0 && (m = wintomon(ev->window))) {
++	if (ev->count == 0 && (m = wintomon(ev->window)))
  		drawbar(m);
-+		if (m == selmon)
-+			updatesystray();
-+	}
+-		if (m == selmon)
+-			updatesystray();
+-	}
  }
  
  void
