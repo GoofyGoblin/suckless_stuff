@@ -1,5 +1,4 @@
 /* See LICENSE file for copyright and license details. */
-#include <X11/XF86keysym.h>
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -13,8 +12,8 @@ enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always
 static const int showtab			= showtab_auto;        /* Default tab bar show mode */
 static const int toptab				= True;               /* False means bottom tab bar */
 
-static const char *fonts[]          = { "IosevkaNerdFontMono:size=16" };
-static const char dmenufont[]       = "IosevkaNerdFontMono:size=16";
+static const char *fonts[]          = { "monospace:size=14" };
+static const char dmenufont[]       = "monospace:size=7";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -76,8 +75,8 @@ static const char *roficmd[] = { "rofi", "-show", "drun" };
 static const char *termcmd[]  = { "st", NULL };
 static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *volumeUp[] = {"./volume_control.sh", "increase", NULL };
-static const char *volumeDown[] = {"./volume_control.sh", "decrease", NULL };
 static const char *volumeMute[] = {"./volume_control.sh", "mute", NULL };
+static const char *volumeDown[] = {"./volume_control.sh", "decrease", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -91,7 +90,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_a,      spawn,          SHCMD("warpd --hint") },
 	{ MODKEY,                       XK_c,      spawn,          SHCMD("warpd --normal") },
-	{ MODKEY,                       XK_w,      tabmode,        {-1} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -148,6 +146,5 @@ static const Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
-	{ ClkTabBar,            0,              Button1,        focuswin,       {0} },
 };
 
