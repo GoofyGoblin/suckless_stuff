@@ -36,7 +36,7 @@
 		[SchemeStatus]  = { normfgcolor, normbgcolor,  "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
 		[SchemeTagsSel]  = { selfgcolor, selbordercolor,  "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
 		[SchemeTagsNorm]  = { normfgcolor, normbgcolor,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
-		[SchemeInfoSel]  = { normbgcolor, normbgcolor,  "#000000"  }, // infobar middle  selected {text,background,not used but cannot be empty}
+		[SchemeInfoSel]  = { normfgcolor, normbgcolor,  "#000000"  }, // infobar middle  selected {text,background,not used but cannot be empty}
 		[SchemeInfoNorm]  = { normfgcolor, normbgcolor,  "#000000"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
 	};
 
@@ -94,7 +94,7 @@
 	static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 	static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 	static const char *roficmd[] = { "rofi", "-show", "drun" };
-	static const char *termcmd[]  = { "st", NULL };
+	static const char *termcmd[]  = { "wezterm", NULL };
 	static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 	static const char *volumeUp[] = {"./volume_control.sh", "increase", NULL };
 	static const char *volumeMute[] = {"./volume_control.sh", "mute", NULL };
